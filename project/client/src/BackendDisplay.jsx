@@ -14,7 +14,7 @@ function BackendDisplay() {
 
   return (
     <>
-      <h3>Backend</h3>
+      <h3>Data from backend file</h3>
       {backendData === "" ? (
         <p>Loading...</p>
       ) : (

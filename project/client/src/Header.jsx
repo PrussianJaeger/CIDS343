@@ -4,7 +4,7 @@ function Header() {
       <div className="header">
         <h1>Financial Tracker</h1>
         <ul>
-          <li>Sam Johnson</li>
+          <li>Sam, Westin, Luke, Joey, Will</li>
         </ul>
         </div>
     </>

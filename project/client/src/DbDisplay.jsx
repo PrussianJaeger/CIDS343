@@ -15,7 +15,8 @@ function DbDisplay() {
 
   return (
     <>
-        <h1>Users</h1>
+      <div className="dbd">
+        <h3>Data from MySQL DB</h3>
         {users.length === 0 ? (
           <p>Loading...</p>
         ) : (
@@ -25,6 +26,7 @@ function DbDisplay() {
             ))}
           </ul>
         )}
+      </div>
     </>
   );
 }
