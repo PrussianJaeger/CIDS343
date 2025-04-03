@@ -1,11 +1,16 @@
 import { Link } from "react-router-dom";
+import Header from "../Header";
+import Footer from "../Footer";
+import DbDisplay from "../DbDisplay";
 
 
 export function Home() {
     return (
        <>
        
-        <h1>This is the Home page</h1>
+        <Header />
+        <DbDisplay />
+        <Footer />
 
        </>
     );
