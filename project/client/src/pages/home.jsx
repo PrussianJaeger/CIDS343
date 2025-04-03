@@ -7,11 +7,9 @@ import DbDisplay from "../DbDisplay";
 export function Home() {
     return (
        <>
-       
         <Header />
         <DbDisplay />
         <Footer />
-
        </>
     );
 }
