@@ -3,6 +3,10 @@ export function Account() {
     return (
        <>
        
-       <h1>This is the account page</h1></>
+       <h1>This is the account page</h1>
+       
+       
+       
+       </>
     );
 }
