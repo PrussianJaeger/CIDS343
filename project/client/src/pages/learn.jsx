@@ -1,39 +1,30 @@
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
-import { SavingAndBudgeting } from "./Saving&Budgeting";
-import { Link } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { SavingAndBudgeting } from "./SavingAndBudgeting";
+import { Investing } from "./investing";
+
 
 
 export function Learn() {
     return (
        <>
        
-       <h1>This is the Learning page</h1>
+         <h1>This is the Learning page</h1>
             <p>Here you can learn about various topics.</p>
             <p>Feel free to explore and learn at your own pace.</p>
 
             <h2>Topics:</h2>
             <ul>
-                <li><a href="/Saving&Budgeting">Saving & Budgeting</a></li>
-                <li><a href="/Investing">Investing</a></li>
-                <li><a href="/Credit">Credit</a></li>
-                <li><a href="/Debt">Debt</a></li>
+                <li><Link to="saving-and-budgeting">Saving & Budgeting</Link></li>
+                <li><Link to="investing">Investing</Link></li>
             </ul>
-            q
-            
+  
+
+            {/* Nested Routes */}
             <Routes>
-                <Route path="/" element={<Learn />} />
-                <Route path="/Saving&Budgeting" element={<SavingAndBudgeting />} />
+                <Route path="saving-and-budgeting" element={<SavingAndBudgeting />} />
+                <Route path="investing" element={<Investing />} />
             </Routes>
-        
-
-
             
-
-            
-            
-       
-       
-       
        </>
     );
 }

@@ -6,6 +6,7 @@ import { Home } from './pages/home';
 import { Learn } from './pages/learn';
 import { Settings } from './pages/Settings';
 import { Layout } from './Layout';
+import { SavingAndBudgeting } from './pages/SavingAndBudgeting';
 
 
 
@@ -21,7 +22,6 @@ function App() {
           <Route path="/learn/*" element={<Learn/>}/>
           <Route path="/Settings" element={<Settings/>}/>
         </Route>
-        
       </Routes>
     </Router>
 
