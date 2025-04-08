@@ -1,10 +1,12 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
-import HomePage from "./Homepage";
+import HomePage from "./HomePage";
 import AccountPage from "./AccountPage";
 import SavingsPage from "./SavingsPage";
 import SpendingsPage from "./SpendingsPage";
 import SettingsPage from "./SettingsPage";
+import SignIn from "./SignIn";
+import SignUp from "./SignUp";
 
 function Home() {
   return (
@@ -58,6 +60,8 @@ function App() {
           | <Link to="/spendings">Spendings</Link> |
           | <Link to="/settings">Settings</Link>
         </nav>
+        <SignIn></SignIn>
+        <SignUp></SignUp>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/account" element={<Account />} />

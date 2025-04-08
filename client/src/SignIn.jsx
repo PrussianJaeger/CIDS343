@@ -20,14 +20,12 @@ const SignIn = () => {
     console.log(data);
 
     if (response.ok) {
-      // ✅ Call your "get current user" function right after login
       fetchCurrentUser();
     } else {
       alert(data.error || "Login failed");
     }
   };
 
-  // 🔄 This function grabs the currently logged-in user
   const fetchCurrentUser = async () => {
     try {
       const res = await fetch("http://localhost:5001/profile");
