@@ -12,7 +12,6 @@ app.use(cors());
 
 let currentUser = null;
 
-// Open SQLite database
 const db = new sqlite3.Database('./database.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
   if (err) {
     console.error("Database connection error:", err.message);
@@ -21,7 +20,7 @@ const db = new sqlite3.Database('./database.db', sqlite3.OPEN_READWRITE | sqlite
   }
 });
 
-// Create table if it doesn't exist
+/*
 db.run(
   `CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -34,6 +33,7 @@ db.run(
     }
   }
 );
+*/
 
 app.post("/signup", (req, res) => {
   console.log("Incoming request:", req.body);
