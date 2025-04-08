@@ -1,50 +1,13 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
-import HomePage from "./Homepage";
+import HomePage from "./HomePage";
 import AccountPage from "./AccountPage";
 import SavingsPage from "./SavingsPage";
 import SpendingsPage from "./SpendingsPage";
 import SettingsPage from "./SettingsPage";
+import Header from "./Header";
+import Footer from "./Footer";
 
-function Home() {
-  return (
-    <>
-      <HomePage></HomePage>
-    </>
-  );
-}
-
-function Account() {
-  return (
-    <>
-      <AccountPage></AccountPage>
-    </>
-  );
-}
-
-function Savings() {
-  return (
-    <>
-      <SavingsPage></SavingsPage>
-    </>
-  );
-}
-
-function Spendings() {
-  return (
-    <>
-      <SpendingsPage></SpendingsPage>
-    </>
-  );
-}
-
-function Settings() {
-  return (
-    <>
-      <SettingsPage></SettingsPage>
-    </>
-  );
-}
 
 function App() {
 
@@ -58,14 +21,19 @@ function App() {
           | <Link to="/spendings">Spendings</Link> |
           | <Link to="/settings">Settings</Link>
         </nav>
+
+        <Header />
+
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="/savings" element={<Savings />} />
-          <Route path="/spendings" element={<Spendings />} />
-          <Route path="/settings" element={<Settings />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/account" element={<AccountPage />} />
+          <Route path="/savings" element={<SavingsPage />} />
+          <Route path="/spendings" element={<SpendingsPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
         </Routes>
       </Router>
+
+      <Footer />
     </>
   );
 }

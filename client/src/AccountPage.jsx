@@ -1,10 +1,8 @@
 function AccountPage() {
   return (
-    <>
-      <div className="accountpage">
-        <h1>Account Page</h1>
-      </div>
-    </>
+      <>
+          <h2>Account page</h2>
+      </>
   );
 }
 
