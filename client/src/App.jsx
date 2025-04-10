@@ -7,6 +7,8 @@ import SpendingsPage from "./SpendingsPage";
 import SettingsPage from "./SettingsPage";
 import Header from "./Header";
 import Footer from "./Footer";
+import SignIn from "./SignIn";
+import SignUp from "./SignUp";
 
 
 function App() {
@@ -23,6 +25,9 @@ function App() {
         </nav>
 
         <Header />
+
+        <SignIn></SignIn>
+        <SignUp></SignUp>
 
         <Routes>
           <Route path="/" element={<HomePage />} />
