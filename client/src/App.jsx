@@ -7,27 +7,24 @@ import SpendingsPage from "./SpendingsPage";
 import SettingsPage from "./SettingsPage";
 import Header from "./Header";
 import Footer from "./Footer";
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
 
 
 function App() {
 
   return (
     <>
+      <Header />
+
       <Router>
         <nav className="navbar">
           <Link to="/">Home</Link> | 
-          | <Link to="/account">Account</Link> | 
-          | <Link to="/savings">Savings</Link> | 
+          | <Link to="/savings">Savings</Link> |
           | <Link to="/spendings">Spendings</Link> |
+          | <Link to="/account">Account</Link> |
           | <Link to="/settings">Settings</Link>
         </nav>
 
-        <Header />
-
-        <SignIn></SignIn>
-        <SignUp></SignUp>
+        <br />
 
         <Routes>
           <Route path="/" element={<HomePage />} />
