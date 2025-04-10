@@ -1,10 +1,8 @@
 function SavingsPage() {
   return (
-    <>
-      <div className="savingspage">
-        <h1>Savings Page</h1>
-      </div>
-    </>
+      <>
+          <h2>Savings page</h2>
+      </>
   );
 }
 
