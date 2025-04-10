@@ -7,6 +7,7 @@ import SpendingsPage from "./SpendingsPage";
 import SettingsPage from "./SettingsPage";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+import LearnPage from "./LearnPage";
 
 function Home() {
   return (
@@ -48,6 +49,14 @@ function Settings() {
   );
 }
 
+function Learn() {
+  return (
+    <>
+      <LearnPage></LearnPage>
+    </>
+  );
+}
+
 function App() {
 
   return (
@@ -58,7 +67,8 @@ function App() {
           | <Link to="/account">Account</Link> | 
           | <Link to="/savings">Savings</Link> | 
           | <Link to="/spendings">Spendings</Link> |
-          | <Link to="/settings">Settings</Link>
+          | <Link to="/settings">Settings</Link> |
+          | <Link to="/learn">Learn</Link>
         </nav>
         <SignIn></SignIn>
         <SignUp></SignUp>
@@ -68,6 +78,7 @@ function App() {
           <Route path="/savings" element={<Savings />} />
           <Route path="/spendings" element={<Spendings />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/learn" element={<Learn />} />
         </Routes>
       </Router>
     </>
