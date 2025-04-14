@@ -5,8 +5,7 @@ import AccountPage from "./AccountPage";
 import SavingsPage from "./SavingsPage";
 import SpendingsPage from "./SpendingsPage";
 import SettingsPage from "./SettingsPage";
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
+import CurrentUser from "./CurrentUser";
 
 function Home() {
   return (
@@ -60,8 +59,7 @@ function App() {
           | <Link to="/spendings">Spendings</Link> |
           | <Link to="/settings">Settings</Link>
         </nav>
-        <SignIn></SignIn>
-        <SignUp></SignUp>
+        <CurrentUser></CurrentUser>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/account" element={<Account />} />
