@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { useState } from 'react';
+import './App.css';
 
 import HomePage from "./HomePage";
 import AccountPage from "./AccountPage";
@@ -8,8 +10,17 @@ import SettingsPage from "./SettingsPage";
 import Header from "./Header";
 import Footer from "./Footer";
 
+function Learn() {
+  return (
+    <>
+      <LearnPage></LearnPage>
+    </>
+  );
+}
 
 function App() {
+  const [showLogin, setShowLogin] = useState(false);
+  const [showSignup, setShowSignup] = useState(false);
 
   return (
     <>
@@ -17,21 +28,36 @@ function App() {
 
       <Router>
         <nav className="navbar">
-          <Link to="/">Home</Link> | 
-          | <Link to="/savings">Savings</Link> |
-          | <Link to="/spendings">Spendings</Link> |
-          | <Link to="/account">Account</Link> |
-          | <Link to="/settings">Settings</Link>
+
+          <div className="nav-links">
+            <Link to="/">Home</Link>
+            <Link to="/account">Account</Link>
+            <Link to="/savings">Savings</Link>
+            <Link to="/spendings">Spendings</Link>
+            <Link to="/settings">Settings</Link>
+            <Link to="/learn">Learn</Link>
+          </div>
+          <div className="auth-buttons">
+            <button className="auth-button" onClick={() => setShowLogin(true)}>Login</button>
+            <button className="auth-button" onClick={() => setShowSignup(true)}>Sign Up</button>
+          </div>
         </nav>
 
-        <br />
+        <AuthPopup isOpen={showLogin} onClose={() => setShowLogin(false)} isLogin={true} />
+        <AuthPopup isOpen={showSignup} onClose={() => setShowSignup(false)} isLogin={false} />
+          
+          <br />
 
+        <Header />
+          
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/account" element={<AccountPage />} />
-          <Route path="/savings" element={<SavingsPage />} />
-          <Route path="/spendings" element={<SpendingsPage />} />
-          <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/savings" element={<Savings />} />
+          <Route path="/spendings" element={<Spendings />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/learn/*" element={<Learn />} />
+
         </Routes>
       </Router>
 
