@@ -9,11 +9,6 @@ import SpendingsPage from "./SpendingsPage";
 import SettingsPage from "./SettingsPage";
 import Header from "./Header";
 import Footer from "./Footer";
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
-import LearnPage from "./LearnPage";
-import AuthPopup from "./components/AuthPopup";
-
 
 function Learn() {
   return (
@@ -29,8 +24,11 @@ function App() {
 
   return (
     <>
+      <Header />
+
       <Router>
         <nav className="navbar">
+
           <div className="nav-links">
             <Link to="/">Home</Link>
             <Link to="/account">Account</Link>
@@ -47,6 +45,8 @@ function App() {
 
         <AuthPopup isOpen={showLogin} onClose={() => setShowLogin(false)} isLogin={true} />
         <AuthPopup isOpen={showSignup} onClose={() => setShowSignup(false)} isLogin={false} />
+          
+          <br />
 
         <Header />
           
