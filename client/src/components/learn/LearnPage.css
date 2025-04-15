@@ -1,0 +1,109 @@
+:root {
+  --rose: #f72585ff;
+  --grape: #7209b7ff;
+  --zaffre: #3a0ca3ff;
+  --neon-blue: #4361eeff;
+  --vivid-sky-blue: #4cc9f0ff;
+}
+
+.learn-page {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.learn-navigation {
+  display: flex;
+  gap: 1rem;
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--zaffre) 0%, var(--grape) 100%);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.topic-link {
+  padding: 0.8rem 1.5rem;
+  background-color: var(--neon-blue);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.topic-link:hover {
+  background-color: var(--vivid-sky-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.topic-content {
+  padding: 2.5rem;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.topic-section {
+  margin: 2.5rem 0;
+  padding: 1.5rem;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+}
+
+.topic-section h3 {
+  color: var(--grape);
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+}
+
+.topic-section p {
+  line-height: 1.8;
+  color: #444;
+  font-size: 1.1rem;
+}
+
+.topic-section ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.topic-section ul li {
+  padding: 0.8rem 1rem;
+  margin: 0.5rem 0;
+  background-color: white;
+  border-radius: 6px;
+  border-left: 4px solid var(--rose);
+  transition: all 0.3s ease;
+}
+
+.topic-section ul li:hover {
+  transform: translateX(5px);
+  background-color: #f8f9fa;
+}
+
+.welcome-message {
+  text-align: center;
+  padding: 3rem;
+  background: linear-gradient(135deg, var(--vivid-sky-blue) 0%, var(--neon-blue) 100%);
+  border-radius: 12px;
+  color: white;
+}
+
+.welcome-message h2 {
+  color: white;
+  margin-bottom: 1.5rem;
+  font-size: 2.2rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-message p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.2rem;
+  line-height: 1.8;
+} 
