@@ -52,24 +52,6 @@ const SignIn = () => {
     }
   };
 
-  const handleLogout = async () => {
-    try {
-      const res = await fetch("http://localhost:5001/logout", {
-        method: "POST",
-        credentials: "include",
-      });
-
-      const data = await res.json();
-      console.log(data);
-
-      if (res.ok) {
-        setCurrentUser(null);
-      }
-    } catch (err) {
-      console.error("Logout failed:", err);
-    }
-  };
-
   return (
     <div>
       <h2>Sign In</h2>

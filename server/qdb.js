@@ -3,6 +3,7 @@
 const sqlite3 = require('sqlite3').verbose(); // Import sqlite3
 const express = require("express");
 const cors = require("cors");
+const session = require('express-session');
 
 const app = express();
 const PORT = 5001;
@@ -21,8 +22,6 @@ const db = new sqlite3.Database('./database.db', sqlite3.OPEN_READWRITE | sqlite
     console.log("Connected to the SQLite database.");
   }
 });
-
-const session = require('express-session');
 
 app.use(session({
   secret: 'supersecretkey', // Change this to something strong and secure
@@ -61,7 +60,6 @@ app.post("/signup", (req, res) => {
     res.json({ message: "User added and logged in successfully!", userId: this.lastID });
   });
 });
-
 
 app.post("/signin", (req, res) => {
   const { email, password } = req.body;
@@ -110,7 +108,6 @@ app.post("/logout", (req, res) => {
     res.json({ message: "Logged out successfully." });
   });
 });
-
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
