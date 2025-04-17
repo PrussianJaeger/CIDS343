@@ -13,6 +13,7 @@ export const UserProvider = ({ children }) => {
         });
         const data = await res.json();
         if (res.ok) setCurrentUser(data.user);
+        console.log(data.user)
       } catch (err) {
         console.error("Error checking session:", err);
       }

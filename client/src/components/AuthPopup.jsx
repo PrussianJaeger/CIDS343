@@ -21,7 +21,7 @@ function AuthPopup({ isOpen, onClose, isLogin }) {
     });
 
     const data = await response.json();
-    console.log(data);
+    console.log("sing in data: ", data);
 
     if (response.ok) {
       fetchCurrentUser();
