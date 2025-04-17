@@ -53,7 +53,7 @@ function SavingsPage() {
       const data = await res.json();
       if (res.ok) {
         setStoredSalary(parsedSalary);
-        console.log()
+        setSalary('');
       } else {
         alert(data.error || 'Failed to update salary');
       }
