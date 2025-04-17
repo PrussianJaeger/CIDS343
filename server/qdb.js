@@ -1,104 +1,132 @@
-// main backend server file
-
-const sqlite3 = require('sqlite3').verbose(); // Import sqlite3
+const sqlite3 = require('sqlite3').verbose();
 const express = require("express");
 const cors = require("cors");
+const session = require('express-session');
 
 const app = express();
 const PORT = 5001;
 
+// Middleware
 app.use(express.json());
-app.use(cors()); 
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true
+}));
 
-let currentUser = null;
+app.use(session({
+  secret: 'supersecretkey', // Use a secure env variable in production
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: false,
+    maxAge: 1000 * 60 * 60 * 24 // 1 day
+  }
+}));
 
+// DB Connection
 const db = new sqlite3.Database('./database.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
   if (err) {
-    console.error("Database connection error:", err.message);
+    console.error("❌ Database connection error:", err.message);
   } else {
-    console.log("Connected to the SQLite database.");
+    console.log("✅ Connected to the SQLite database.");
   }
 });
 
-/*
-db.run(
-  `CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    email TEXT UNIQUE NOT NULL,
-    password TEXT NOT NULL
-  )`,
-  (err) => {
-    if (err) {
-      console.error("Error creating table:", err.message);
-    }
-  }
-);
-*/
+// Utility
+const validateCredentials = (email, password) => {
+  return email && password;
+};
 
+// Routes
 app.post("/signup", (req, res) => {
-  console.log("Incoming request:", req.body);
-
   const { email, password } = req.body;
-
-  console.log('signup', email, password); // check if request is working
-
-  if (!email || !password) {
-    console.log("Missing email or password");
+  if (!validateCredentials(email, password)) {
     return res.status(400).json({ error: "Email and password are required." });
   }
 
-  const insertQuery = "INSERT INTO users (email, password) VALUES (?, ?)";
-  db.run(insertQuery, [email, password], function (err) {
+  const insertQuery = "INSERT INTO users (email, password, monthlySalary) VALUES (?, ?, ?)";
+  db.run(insertQuery, [email, password, 0], function (err) {
     if (err) {
-      console.error("Database insert error:", err.message);
       if (err.message.includes("UNIQUE constraint failed")) {
         return res.status(400).json({ error: "Email already exists." });
       }
       return res.status(500).json({ error: "Database error." });
     }
 
-    console.log("User added:", { id: this.lastID, email });
-    res.json({ message: "User added successfully!", userId: this.lastID });
+    const selectQuery = "SELECT * FROM users WHERE id = ?";
+    db.get(selectQuery, [this.lastID], (err, user) => {
+      if (err) {
+        return res.status(500).json({ error: "Failed to retrieve user after insert." });
+      }
+
+      req.session.user = { id: user.id, email: user.email, salary: user.monthlySalary };
+      res.json({ message: "User signed up and logged in!", userId: user.id });
+    });
   });
 });
 
 app.post("/signin", (req, res) => {
   const { email, password } = req.body;
-
-  console.log('login', email, password); // check if request is working
-
-  if (!email || !password) {
+  if (!validateCredentials(email, password)) {
     return res.status(400).json({ error: "Email and password are required." });
   }
 
-  const selectQuery = "SELECT * FROM users WHERE email = ?";
+  const query = "SELECT * FROM users WHERE email = ?";
+  db.get(query, [email], (err, user) => {
+    if (err) return res.status(500).json({ error: "Database error." });
+    if (!user) return res.status(401).json({ error: "User not found." });
+    if (user.password !== password) return res.status(401).json({ error: "Invalid password." });
 
-  db.get(selectQuery, [email], (err, user) => {
-    if (err) {
-      return res.status(500).json({ error: "Database error." });
-    }
-
-    if (!user) {
-      return res.status(401).json({ error: "User not found." });
-    }
-
-    if (user.password !== password) {
-      return res.status(401).json({ error: "Invalid password." });
-    }
-
-    currentUser = { id: user.id, email: user.email }; 
-    res.json({ message: "Login successful!", userId: currentUser });
+    req.session.user = { id: user.id, email: user.email, salary: user.monthlySalary };
+    res.json({ message: "Login successful!", userId: user.id });
   });
 });
 
 app.get("/profile", (req, res) => {
-  if (!currentUser) {
+  if (!req.session.user) {
     return res.status(401).json({ error: "No user is logged in." });
   }
 
-  res.json({ user: currentUser });
+  res.json({ user: req.session.user });
+});
+
+app.post("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).json({ error: "Logout failed." });
+    }
+    res.clearCookie("connect.sid");
+    res.json({ message: "Logged out successfully." });
+  });
+});
+
+app.post("/get-salary", (req, res) => {
+  const { email } = req.body;
+  if (!email) return res.status(400).json({ error: "Email is required." });
+
+  const query = "SELECT monthlySalary FROM users WHERE email = ?";
+  db.get(query, [email], (err, user) => {
+    if (err) return res.status(500).json({ error: "Database query failed." });
+    if (!user) return res.status(404).json({ error: "User not found." });
+
+    res.json({ salary: user.monthlySalary });
+  });
+});
+
+app.post("/set-salary", (req, res) => {
+  const { email, salary } = req.body;
+  if (!email || typeof salary !== "number") {
+    return res.status(400).json({ error: "Valid email and salary are required." });
+  }
+
+  const query = "UPDATE users SET monthlySalary = ? WHERE email = ?";
+  db.run(query, [salary, email], function (err) {
+    if (err) return res.status(500).json({ error: "Failed to update salary." });
+
+    res.json({ message: "Salary updated successfully.", changes: this.changes });
+  });
 });
 
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
 });

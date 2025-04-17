@@ -1,25 +1,77 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './AuthPopup.css';
 
 function AuthPopup({ isOpen, onClose, isLogin }) {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [currentUser, setCurrentUser] = useState(null);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+  useEffect(() => {
+    fetchCurrentUser();
+  }, []);
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+
+    const response = await fetch("http://localhost:5001/signin", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await response.json();
+    console.log("sing in data: ", data);
+
+    if (response.ok) {
+      fetchCurrentUser();
+      onClose(); // close popup
+      window.location.reload();
+    } else {
+      alert(data.error || "Login failed");
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
+
+    const response = await fetch("http://localhost:5001/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await response.json();
+    console.log(data);
+
+    if (response.ok) {
+      fetchCurrentUser();
+      onClose(); // close popup
+      window.location.reload();
+    } else {
+      alert(data.error || "Signup failed");
+    }
+  };
+
+  const fetchCurrentUser = async () => {
+    try {
+      const res = await fetch("http://localhost:5001/profile", {
+        method: "GET",
+        credentials: "include",
+      });
+
+      const userData = await res.json();
+
+      if (res.ok) {
+        setCurrentUser(userData.user);
+      } else {
+        setCurrentUser(null);
+      }
+    } catch (err) {
+      console.error("Error fetching user:", err);
+      setCurrentUser(null);
+    }
   };
 
   if (!isOpen) return null;
@@ -29,15 +81,15 @@ function AuthPopup({ isOpen, onClose, isLogin }) {
       <div className="popup-content" onClick={e => e.stopPropagation()}>
         <button className="close-button" onClick={onClose}>×</button>
         <h2>{isLogin ? 'Login' : 'Sign Up'}</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={isLogin ? handleSignIn : handleSignUp}>
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
               type="email"
               id="email"
               name="email"
-              value={formData.email}
-              onChange={handleChange}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
@@ -47,24 +99,11 @@ function AuthPopup({ isOpen, onClose, isLogin }) {
               type="password"
               id="password"
               name="password"
-              value={formData.password}
-              onChange={handleChange}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
-          {!isLogin && (
-            <div className="form-group">
-              <label htmlFor="confirmPassword">Confirm Password</label>
-              <input
-                type="password"
-                id="confirmPassword"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                required
-              />
-            </div>
-          )}
           <button type="submit" className="submit-button">
             {isLogin ? 'Login' : 'Sign Up'}
           </button>
@@ -74,4 +113,4 @@ function AuthPopup({ isOpen, onClose, isLogin }) {
   );
 }
 
-export default AuthPopup; 
+export default AuthPopup;

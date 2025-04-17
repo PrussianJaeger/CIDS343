@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [currentUser, setCurrentUser] = useState(null); 
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -12,11 +13,35 @@ const SignUp = () => {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include", 
       body: JSON.stringify({ email, password }),
     });
 
     const data = await response.json();
     console.log(data);
+
+    if (response.ok) {
+      fetchCurrentUser();
+      window.location.reload();
+    } else {
+      alert(data.error || "Signup failed");
+    }
+  };
+
+  const fetchCurrentUser = async () => {
+    try {
+      const res = await fetch("http://localhost:5001/profile", {
+        credentials: "include",
+      });
+      const userData = await res.json();
+      if (res.ok) {
+        setCurrentUser(userData.user);
+      } else {
+        setCurrentUser(null);
+      }
+    } catch (err) {
+      console.error("Error fetching user:", err);
+    }
   };
 
   return (

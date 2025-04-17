@@ -1,14 +1,18 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { useState } from 'react';
 import './App.css';
-
-import HomePage from "./HomePage";
-import AccountPage from "./AccountPage";
-import SavingsPage from "./SavingsPage";
-import SpendingsPage from "./SpendingsPage";
-import SettingsPage from "./SettingsPage";
 import Header from "./Header";
 import Footer from "./Footer";
+import LearnPage from "./LearnPage";
+import Home from './HomePage';
+import Account from './AccountPage';
+import Savings from './SavingsPage';
+import Spendings from './SpendingsPage';
+import Settings from './SettingsPage';
+import AuthPopup from './components/AuthPopup'
+import React, { useContext } from "react";
+import { UserContext } from "./UserContext";
+
 
 function Learn() {
   return (
@@ -21,6 +25,7 @@ function Learn() {
 function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
+  const { currentUser } = useContext(UserContext);
 
   return (
     <>
@@ -31,15 +36,21 @@ function App() {
 
           <div className="nav-links">
             <Link to="/">Home</Link>
-            <Link to="/account">Account</Link>
             <Link to="/savings">Savings</Link>
             <Link to="/spendings">Spendings</Link>
             <Link to="/settings">Settings</Link>
             <Link to="/learn">Learn</Link>
           </div>
           <div className="auth-buttons">
-            <button className="auth-button" onClick={() => setShowLogin(true)}>Login</button>
-            <button className="auth-button" onClick={() => setShowSignup(true)}>Sign Up</button>
+            { !currentUser ? (
+              <div>
+                <button className="auth-button" onClick={() => setShowLogin(true)}>Login</button>
+                <button className="auth-button" onClick={() => setShowSignup(true)}>Sign Up</button>
+              </div>
+            ) : (
+              //<p>Welcome, {currentUser.email}!</p>
+              <Link className="auth-button" to="/account">{currentUser.email}</Link>
+            )} 
           </div>
         </nav>
 
@@ -47,8 +58,6 @@ function App() {
         <AuthPopup isOpen={showSignup} onClose={() => setShowSignup(false)} isLogin={false} />
           
           <br />
-
-        <Header />
           
         <Routes>
           <Route path="/" element={<Home />} />

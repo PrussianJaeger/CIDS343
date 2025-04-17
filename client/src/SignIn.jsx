@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [currentUser, setCurrentUser] = useState(null); // store logged-in user
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    fetchCurrentUser();
+  }, []);
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -13,6 +17,7 @@ const SignIn = () => {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({ email, password }),
     });
 
@@ -21,6 +26,7 @@ const SignIn = () => {
 
     if (response.ok) {
       fetchCurrentUser();
+      window.location.reload();
     } else {
       alert(data.error || "Login failed");
     }
@@ -28,16 +34,27 @@ const SignIn = () => {
 
   const fetchCurrentUser = async () => {
     try {
-      const res = await fetch("http://localhost:5001/profile");
+      const res = await fetch("http://localhost:5001/profile", {
+        method: "GET",
+        credentials: "include",
+      });
+
       const userData = await res.json();
-      setCurrentUser(userData.user);
+
+      if (res.ok) {
+        setCurrentUser(userData.user);
+      } else {
+        setCurrentUser(null);
+      }
     } catch (err) {
       console.error("Error fetching user:", err);
+      setCurrentUser(null);
     }
   };
 
   return (
     <div>
+      <h2>Sign In</h2>
       <form onSubmit={handleSignIn}>
         <input
           value={email}
@@ -52,17 +69,8 @@ const SignIn = () => {
         />
         <button type="submit">Sign In</button>
       </form>
-
-      <div>
-        {currentUser ? (
-          <p>Welcome, {currentUser.email}</p>
-        ) : (
-          <p>You are logged in as Guest</p>
-        )}
-      </div>
     </div>
   );
 };
-
 
 export default SignIn;

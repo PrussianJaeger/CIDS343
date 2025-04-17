@@ -1,14 +1,18 @@
-import React from 'react';
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+import SignOut from "./SignOut";
+import { UserContext } from "./UserContext";
+import CurrentUser from "./CurrentUser";
 
 function AccountPage() {
   return (
-      <>
-          <h2>Account page</h2>
-          <SignIn></SignIn>
-          <SignUp></SignUp>
-      </>
+    <>
+      <div className="accountpage">
+        <h1>Account Page</h1>
+        <CurrentUser></CurrentUser>
+        <SignOut></SignOut>
+      </div>
+    </>
   );
 }
 
