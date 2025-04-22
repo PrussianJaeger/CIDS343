@@ -1,6 +1,9 @@
+@import url(https://fonts.googleapis.com/css?family=Merriweather);
+
 body {
-  background-color: bisque;
-  
+  background-color: #dddbd5;
+  font-family: 'Merriweather', serif;
+  margins: 1.5rem;
 }
 :root {
   --rose: #f72585ff;
@@ -10,11 +13,24 @@ body {
   --vivid-sky-blue: #4cc9f0ff;
 }
 
+.header, .primary {
+  padding-left: 1rem;
+}
+
+.footer {
+  display: flex;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  padding: 1rem;
+  border-top: 1px solid;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem;
+  padding: 1rem;
   background: linear-gradient(135deg, var(--zaffre) 0%, var(--grape) 100%);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -59,19 +75,19 @@ body {
   color: var(--vivid-sky-blue);
 }
 
-.auth-button {
+#auth-button {
   background: transparent;
   border: 2px solid var(--vivid-sky-blue);
   color: white;
   padding: 0.5rem 1.5rem;
   border-radius: 6px;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: bolder;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-.auth-button:hover {
+#auth-button:hover {
   background: var(--vivid-sky-blue);
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
