@@ -6,7 +6,6 @@ const session = require('express-session');
 const app = express();
 const PORT = 5001;
 
-// Middleware
 app.use(express.json());
 app.use(cors({
   origin: "http://localhost:5173",
