@@ -29,6 +29,16 @@ const db = new sqlite3.Database('./database.db', sqlite3.OPEN_READWRITE | sqlite
     console.error("❌ Database connection error:", err.message);
   } else {
     console.log("✅ Connected to the SQLite database.");
+    // Create transactions table if it doesn't exist
+    db.run(`CREATE TABLE IF NOT EXISTS transactions (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id INTEGER NOT NULL,
+      amount REAL NOT NULL,
+      description TEXT,
+      category TEXT,
+      date TEXT DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (user_id) REFERENCES users(id)
+    )`);
   }
 });
 
@@ -124,6 +134,53 @@ app.post("/set-salary", (req, res) => {
     if (err) return res.status(500).json({ error: "Failed to update salary." });
 
     res.json({ message: "Salary updated successfully.", changes: this.changes });
+  });
+});
+
+// Transaction Routes
+app.post("/transactions", (req, res) => {
+  const { email } = req.body;
+  if (!email) return res.status(400).json({ error: "Email is required." });
+
+  const query = `
+    SELECT t.* 
+    FROM transactions t
+    JOIN users u ON t.user_id = u.id
+    WHERE u.email = ?
+    ORDER BY t.date DESC
+  `;
+
+  db.all(query, [email], (err, transactions) => {
+    if (err) return res.status(500).json({ error: "Failed to fetch transactions." });
+    res.json({ transactions });
+  });
+});
+
+app.post("/add-transaction", (req, res) => {
+  const { email, amount, description, category } = req.body;
+  if (!email || !amount || !description || !category) {
+    return res.status(400).json({ error: "All fields are required." });
+  }
+
+  // First get the user_id from email
+  db.get("SELECT id FROM users WHERE email = ?", [email], (err, user) => {
+    if (err) return res.status(500).json({ error: "Database error." });
+    if (!user) return res.status(404).json({ error: "User not found." });
+
+    // Then insert the transaction
+    const insertQuery = `
+      INSERT INTO transactions (user_id, amount, description, category)
+      VALUES (?, ?, ?, ?)
+    `;
+
+    db.run(insertQuery, [user.id, amount, description, category], function(err) {
+      if (err) return res.status(500).json({ error: "Failed to add transaction." });
+      
+      res.json({ 
+        message: "Transaction added successfully",
+        transactionId: this.lastID
+      });
+    });
   });
 });
 
