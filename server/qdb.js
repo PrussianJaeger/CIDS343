@@ -126,6 +126,58 @@ app.post("/set-salary", (req, res) => {
   });
 });
 
+app.post("/add-transaction", (req, res) => {
+  const { amount, expense_name, user_id } = req.body;
+
+  console.log(req.body);
+
+  if (!amount || !expense_name || !user_id) {
+    return res.status(400).json({ error: "Amount, expense name, and user ID are required." });
+  }
+
+  const insertQuery = 
+  `INSERT INTO transactions (amount, expense_name, user_id) VALUES (?, ?, ?)`;
+
+  db.run(insertQuery, [amount, expense_name, user_id], function (err) {
+    if (err) {
+      return res.status(500).json({ error: "Database error when inserting transaction." });
+    }
+
+    const selectQuery = "SELECT * FROM transactions WHERE transaction_id = ?";
+    db.get(selectQuery, [this.lastID], (err, transaction) => {
+      if (err) {
+        return res.status(500).json({ error: "Failed to retrieve transaction after insert." });
+      }
+
+      res.json({ message: "Transaction added successfully!", transaction });
+    });
+  });
+});
+
+app.get("/transactions", (req, res) => {
+  const userId = req.session.user?.id;
+
+  console.log(req.session.user?.id);
+
+  if (!userId) {
+    return res.status(401).json({ error: "Unauthorized. Please log in." });
+  }
+
+  const selectQuery = `
+    SELECT * FROM transactions
+    WHERE user_id = ?
+    ORDER BY transaction_date DESC
+  `;
+
+  db.all(selectQuery, [userId], (err, transactions) => {
+    if (err) {
+      return res.status(500).json({ error: "Failed to fetch transactions." });
+    }
+
+    res.json({ transactions });
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });

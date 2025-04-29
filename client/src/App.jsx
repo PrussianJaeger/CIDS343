@@ -40,6 +40,7 @@ function App() {
             <Link to="/settings">Settings</Link>
             <Link to="/learn">Learn</Link>
           </div>
+
           <div className="auth-buttons">
             { !currentUser ? (
               <div>
@@ -56,7 +57,7 @@ function App() {
         <AuthPopup isOpen={showLogin} onClose={() => setShowLogin(false)} isLogin={true} />
         <AuthPopup isOpen={showSignup} onClose={() => setShowSignup(false)} isLogin={false} />
           
-          <br />
+        <br />
           
         <Routes>
           <Route path="/" element={<Home />} />
@@ -68,8 +69,6 @@ function App() {
 
         </Routes>
       </Router>
-
-      <Footer />
     </>
   );
 }
