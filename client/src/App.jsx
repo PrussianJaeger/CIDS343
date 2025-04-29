@@ -2,24 +2,16 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { useState } from 'react';
 import Header from "./Header";
 import Footer from "./Footer";
-import LearnPage from "./LearnPage";
-import Home from './HomePage';
-import Account from './AccountPage';
-import Savings from './SavingsPage';
-import Spendings from './SpendingsPage';
-import Settings from './SettingsPage';
+import HomePage from './HomePage';
+import AccountPage from './AccountPage';
+import SavingsPage from './SavingsPage';
+import SpendingsPage from './SpendingsPage';
+import SettingsPage from './SettingsPage';
+import LearnPage from './LearnPage';
 import AuthPopup from './components/AuthPopup'
 import React, { useContext } from "react";
 import { UserContext } from "./UserContext";
 
-
-function Learn() {
-  return (
-    <>
-      <LearnPage></LearnPage>
-    </>
-  );
-}
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -28,7 +20,7 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header className={"header"}/>
 
       <Router>
         <nav className="navbar">
@@ -49,7 +41,8 @@ function App() {
               </div>
             ) : (
               //<p>Welcome, {currentUser.email}!</p>
-              <Link className="auth-button" to="/account">{currentUser.email}</Link>
+              //<Link className="auth-button" to="/account">{currentUser.email}</Link>
+                <Link id="auth-button" to="/account">Account</Link>
             )} 
           </div>
         </nav>
@@ -57,17 +50,18 @@ function App() {
         <AuthPopup isOpen={showLogin} onClose={() => setShowLogin(false)} isLogin={true} />
         <AuthPopup isOpen={showSignup} onClose={() => setShowSignup(false)} isLogin={false} />
           
-        <br />
-          
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="/savings" element={<Savings />} />
-          <Route path="/spendings" element={<Spendings />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/learn/*" element={<Learn />} />
+          <br />
+        <div  className="primary">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/account" element={<AccountPage />} />
+            <Route path="/savings" element={<SavingsPage />} />
+            <Route path="/spendings" element={<SpendingsPage />} />
+            <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/learn/*" element={<LearnPage />} />
 
-        </Routes>
+          </Routes>
+        </div>
       </Router>
     </>
   );

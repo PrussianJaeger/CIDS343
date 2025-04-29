@@ -1,7 +1,9 @@
+import './components/settings/SettingsPage.css';
+
 function SettingsPage() {
   return (
       <>
-          <h2>Settings page</h2>
+          <h2 id="SettingsPageh2">Settings page</h2>
       </>
   );
 }

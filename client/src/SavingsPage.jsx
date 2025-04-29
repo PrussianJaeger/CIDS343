@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from './UserContext';
+import './components/savings/SavingsPage.css';
 
 function SavingsPage() {
   const { currentUser } = useContext(UserContext);

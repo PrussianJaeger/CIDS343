@@ -1,0 +1,24 @@
+.salary-component, #SavingsPageh2 {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 30px;
+    background-color: white;
+    font-family: sans-serif;
+  }
+  
+  .salary-component h3 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .salary-component {
+    font-size: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  
+ 
+  
