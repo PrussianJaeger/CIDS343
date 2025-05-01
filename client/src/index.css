@@ -1,10 +1,16 @@
 @import url(https://fonts.googleapis.com/css?family=Merriweather);
 
 body {
-  background-color: #dddbd5;
+  background: #dddbd5;
   font-family: 'Merriweather', serif;
   margins: 1.5rem;
 }
+
+.dark-mode {
+  background: #353532;
+  color: white;
+}
+
 :root {
   --rose: #f72585ff;
   --grape: #7209b7ff;
@@ -13,12 +19,22 @@ body {
   --vivid-sky-blue: #4cc9f0ff;
 }
 
-.header, .primary {
+main {
   padding-left: 1rem;
 }
 
+.header {
+  display:flex;
+  padding-left: 1rem;
+  background: var(--grape);
+  color: white;
+}
+
+
 .footer {
   display: flex;
+  align-items: center;
+  gap: 1rem;
   width: 100%;
   position: fixed;
   bottom: 0;
@@ -75,7 +91,9 @@ body {
   color: var(--vivid-sky-blue);
 }
 
-#auth-button {
+
+
+.auth-button, #darkButton {
   background: transparent;
   border: 2px solid var(--vivid-sky-blue);
   color: white;
@@ -87,13 +105,30 @@ body {
   transition: all 0.3s ease;
 }
 
-#auth-button:hover {
+.auth-button:hover, #darkButton:hover   {
   background: var(--vivid-sky-blue);
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+#darkButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 2.35rem;
+}
+#darkButton [img] {
+  fill: white;
+  stroke: white;
+}
+
 /* Remove the pipe separators from the JSX and handle spacing with gap */
 .navbar a + a {
   margin-left: 0;
+}
+
+#authors {
+  color: #666666;
+  font-size: .8rem;
 }
