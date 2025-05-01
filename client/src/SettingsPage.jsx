@@ -1,5 +1,3 @@
-import './components/settings/SettingsPage.css';
-
 function SettingsPage() {
   return (
       <>
