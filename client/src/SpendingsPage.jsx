@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from './UserContext';
-import './styles/SpendingsPage.css';
 
 function SpendingsPage() {
   const { currentUser } = useContext(UserContext);
@@ -74,10 +73,10 @@ function SpendingsPage() {
   }
 
   return (
-    <div className="spendings-page">
+    <div className="page">
       <h2>Your Transactions</h2>
       
-      <div className="transaction-form">
+      <div className="content">
         <h3>Add New Transaction</h3>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
@@ -125,7 +124,7 @@ function SpendingsPage() {
         </form>
       </div>
 
-      <div className="transactions-list">
+      <div className="content">
         <h3>Recent Transactions</h3>
         {transactions.length === 0 ? (
           <p>No transactions yet.</p>

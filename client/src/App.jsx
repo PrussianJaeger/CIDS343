@@ -11,12 +11,15 @@ import LearnPage from './LearnPage';
 import AuthPopup from './components/AuthPopup'
 import React, { useContext } from "react";
 import { UserContext } from "./UserContext";
+import darkThemeImage from "./assets/dark-theme-white.svg";
 
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
+  const [darkModeState, setDarkMode] = useState(false);
   const { currentUser } = useContext(UserContext);
+
 
   return (
     <>
@@ -26,13 +29,18 @@ function App() {
         <nav className="navbar">
 
           <div className="nav-links">
-            <Link to="/">Home</Link>
-            <Link to="/savings">Savings</Link>
-            <Link to="/spendings">Spendings</Link>
-            <Link to="/settings">Settings</Link>
-            <Link to="/learn">Learn</Link>
+            <Link to="/" className="link">Home</Link>
+            <Link to="/savings" className="link">Savings</Link>
+            <Link to="/spendings" className="link">Spendings</Link>
+            <Link to="/settings" className="link">Settings</Link>
+            <Link to="/learn" className="link">Learn</Link>
           </div>
+
           <div className="auth-buttons">
+            <button id="darkButton" onClick={() => {setDarkMode(!darkModeState); darkMode();}}>
+              <img src={darkThemeImage} alt="Dark Mode"/>
+            </button>
+
             { !currentUser ? (
               <div>
                 <button className="auth-button" onClick={() => setShowLogin(true)}>Login</button>
@@ -41,7 +49,7 @@ function App() {
             ) : (
               //<p>Welcome, {currentUser.email}!</p>
               //<Link className="auth-button" to="/account">{currentUser.email}</Link>
-                <Link id="auth-button" to="/account">Account</Link>
+                <Link className="auth-button" to="/account">Account</Link>
             )} 
           </div>
         </nav>
@@ -50,7 +58,7 @@ function App() {
         <AuthPopup isOpen={showSignup} onClose={() => setShowSignup(false)} isLogin={false} />
           
           <br />
-        <div  className="primary">
+        <main>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/account" element={<AccountPage />} />
@@ -60,7 +68,7 @@ function App() {
             <Route path="/learn/*" element={<LearnPage />} />
 
           </Routes>
-        </div>
+        </main>
       </Router>
 
       <Footer />
@@ -69,3 +77,11 @@ function App() {
 }
 
 export default App;
+
+function darkMode() {
+  document.querySelector("body").classList.toggle("dark-mode");
+}
+/*
+function
+
+ */
