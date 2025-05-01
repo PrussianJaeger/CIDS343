@@ -97,3 +97,22 @@ body {
 .navbar a + a {
   margin-left: 0;
 }
+
+#projectDescriptionP, .salary-component, #SavingsPageh2 {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 30px;
+  background-color: white;
+  font-family: sans-serif;
+}
+
+#projectDescriptionh1 {
+  font-size: 30px;
+  text-align: center;
+}
+
+#projectDescriptionP {
+  font-size: 20px;
+  text-align: center;
+}
