@@ -29,7 +29,6 @@ function App() {
             <Link to="/">Home</Link>
             <Link to="/savings">Savings</Link>
             <Link to="/spendings">Spendings</Link>
-            <Link to="/settings">Settings</Link>
             <Link to="/learn">Learn</Link>
           </div>
 
@@ -57,7 +56,6 @@ function App() {
             <Route path="/account" element={<AccountPage />} />
             <Route path="/savings" element={<SavingsPage />} />
             <Route path="/spendings" element={<SpendingsPage />} />
-            <Route path="/settings" element={<SettingsPage />} />
             <Route path="/learn/*" element={<LearnPage />} />
 
           </Routes>
