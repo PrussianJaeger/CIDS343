@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from './UserContext';
-import './components/savings/SavingsPage.css';
 
 function SavingsPage() {
   const { currentUser } = useContext(UserContext);
@@ -66,23 +65,25 @@ function SavingsPage() {
   if (!currentUser) return <p>Please log in.</p>;
 
   return (
-    <div className="salary-component">
-      <h3>Monthly Salary</h3>
-      <p>Current Salary: ${storedSalary}</p>
+      <div className="page">
+        <div className="content">
+          <h3>Monthly Salary</h3>
+          <p>Current Salary: ${storedSalary}</p>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="number"
-          value={salary}
-          onChange={(e) => setSalary(e.target.value)}
-          placeholder="Enter monthly salary"
-          min="0"
-          step="0.01"
-          required
-        />
-        <button type="submit">Save Salary</button>
-      </form>
-    </div>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="number"
+              value={salary}
+              onChange={(e) => setSalary(e.target.value)}
+              placeholder="Enter monthly salary"
+              min="0"
+              step="0.01"
+              required
+            />
+            <button type="submit">Save Salary</button>
+          </form>
+        </div>
+      </div>
   );
 }
 
