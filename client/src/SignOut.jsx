@@ -24,9 +24,11 @@ const SignOut = () => {
   };
 
   return (
-    <button onClick={handleLogout}>
-      Log Out
-    </button>
+    <div className="change">
+      <button className="auth-button setting-buttons" onClick={handleLogout}>
+        Log Out
+      </button>
+    </div>
   );
 };
 
