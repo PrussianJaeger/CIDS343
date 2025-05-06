@@ -1,8 +1,8 @@
 import { useState } from "react";
-import AuthPopup from "./components/AuthPopup"; // Make sure this import is correct
+import AuthPopup from "./components/AuthPopup"; 
 
 function ChangePassEmail() {
-  const [popupType, setPopupType] = useState(null); // 'password' | 'email' | null
+  const [popupType, setPopupType] = useState(null); 
   const [newPassword, setNewPassword] = useState("");
   const [newEmail, setNewEmail] = useState("");
 

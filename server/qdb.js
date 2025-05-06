@@ -2,6 +2,7 @@ const sqlite3 = require('sqlite3').verbose();
 const express = require("express");
 const cors = require("cors");
 const session = require('express-session');
+const bodyParser = require('body-parser');
 
 const app = express();
 const PORT = 5001;
@@ -217,6 +218,53 @@ app.post("/change-email", (req, res) => {
     }
 
     res.json({ message: "email changed successfully." });
+  });
+});
+
+// Route to get savings data
+app.post('/get-savings', (req, res) => {
+  const { email } = req.body;
+
+  db.get('SELECT * FROM users WHERE email = ?', [email], (err, row) => {
+    if (err) {
+      console.error('Error fetching savings data:', err);
+      return res.status(500).json({ error: 'Database error' });
+    }
+    if (!row) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    res.json({
+      monthlySalary: row.monthlySalary,
+      monthly_goal: row.monthly_goal,
+      total_monthly_savings: row.total_monthly_savings,
+      total_savings: row.total_savings
+    });
+  });
+});
+
+// Route to update savings data
+app.post('/update-savings', (req, res) => {
+  const { email, field, value } = req.body;
+  
+  const fields = ['monthlySalary', 'monthly_goal', 'total_monthly_savings', 'total_savings'];
+  
+  if (!fields.includes(field)) {
+    return res.status(400).json({ error: 'Invalid field' });
+  }
+
+  const query = `UPDATE users SET ${field} = ? WHERE email = ?`;
+
+  db.run(query, [value, email], function(err) {
+    if (err) {
+      console.error('Error updating savings:', err);
+      return res.status(500).json({ error: 'Database error' });
+    }
+
+    if (this.changes === 0) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.status(200).json({ success: true });
   });
 });
 

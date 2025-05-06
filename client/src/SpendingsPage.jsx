@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from './UserContext';
+import {
+  LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer
+} from 'recharts';
+
 
 function SpendingsPage() {
   const { currentUser } = useContext(UserContext);
@@ -46,6 +50,34 @@ function SpendingsPage() {
       }
       return { key, direction: 'asc' };
     });
+  };
+
+  const getMonthlySpendingData = (transactions) => {
+    const monthlyTotals = {};
+  
+    transactions.forEach((t) => {
+      const date = new Date(t.date);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const key = `${month}-${year}`; // e.g., "04-2025"
+  
+      if (!monthlyTotals[key]) {
+        monthlyTotals[key] = 0;
+      }
+      monthlyTotals[key] += t.amount;
+    });
+  
+    return Object.entries(monthlyTotals)
+      .sort(([a], [b]) => {
+        // Convert "MM-YYYY" back to a Date for proper sorting
+        const [monthA, yearA] = a.split('-').map(Number);
+        const [monthB, yearB] = b.split('-').map(Number);
+        return new Date(yearA, monthA - 1) - new Date(yearB, monthB - 1);
+      })
+      .map(([month, total]) => ({
+        month,
+        total: parseFloat(total.toFixed(2)),
+      }));
   };
 
   const getSortedTransactions = () => {
@@ -105,6 +137,8 @@ function SpendingsPage() {
   if (!currentUser) return <p>Please log in to view your transactions.</p>;
 
   const sortedTransactions = getSortedTransactions();
+  const totalSpending = sortedTransactions.reduce((sum, t) => sum + t.amount, 0);
+
 
   const getSortSymbol = (key) => {
     if (sortConfig.key !== key) return '';
@@ -197,9 +231,28 @@ function SpendingsPage() {
                 </tr>
               ))}
             </tbody>
+            <tfoot>
+              <tr>
+                <td colSpan="4" style={{ textAlign: 'right', fontWeight: 'bold' }}>Total:</td>
+                <td style={{ fontWeight: 'bold' }}>${totalSpending.toFixed(2)}</td>
+              </tr>
+            </tfoot>
           </table>
         )}
       </div>
+      <div className="content">
+      <h3>Monthly Spending</h3>
+      <ResponsiveContainer width="100%" height={300}>
+        <LineChart data={getMonthlySpendingData(transactions)}>
+          <CartesianGrid stroke="#ccc" />
+          <XAxis dataKey="month" />
+          <YAxis />
+          <Tooltip />
+          <Line type="monotone" dataKey="total" stroke="#8884d8" strokeWidth={2} />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
+
     </div>
   );
 }
