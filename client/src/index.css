@@ -218,3 +218,13 @@ tr:hover {
   text-align: center;
   font-family: sans-serif;
 }
+
+#saveSalaryButton {
+  padding: 2px;
+  font-size: 15px;
+  margin-top: 2%;
+}
+
+#savingSplits {
+  line-height: 200%;
+}

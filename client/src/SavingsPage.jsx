@@ -5,6 +5,9 @@ function SavingsPage() {
   const { currentUser } = useContext(UserContext);
   const [salary, setSalary] = useState('');
   const [storedSalary, setStoredSalary] = useState(0);
+  const save75percent = storedSalary * .25;
+  const save50percent = storedSalary * .50;
+  const save25percent = storedSalary * .75;
 
   useEffect(() => {
     if (currentUser) {
@@ -80,7 +83,16 @@ function SavingsPage() {
               step="0.01"
               required
             />
-            <button type="submit">Save Salary</button>
+            <button type="submit" id="saveSalaryButton">Save Salary</button>
+            <div id="savingSplits">
+            <h3>Savings splits:</h3>
+            <p>If you save 75% of your income, 
+              you can spend: ${save75percent} monthly</p>
+            <p>If you save 50% of your income,
+              you can spend: ${save50percent} monthly</p>
+            <p>If you save 25% of your income,
+              you can spend: ${save25percent} monthly</p>
+            </div>
           </form>
         </div>
       </div>
