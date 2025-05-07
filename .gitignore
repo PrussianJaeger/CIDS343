@@ -11,3 +11,4 @@
 *.local
 *.log
 .Rhistory
+node_modules/

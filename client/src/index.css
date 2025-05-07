@@ -17,8 +17,12 @@ body {
   color: white;
 }
 
-.dark-mode .topic-section ul, .dark-mode .content th {
+.dark-mode .topic-section ul, .dark-mode .content th, .dark-mode #chart {
   color: black;
+}
+
+.dark-mode #chart {
+  background: white;
 }
 
 :root {
