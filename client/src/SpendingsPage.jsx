@@ -240,18 +240,18 @@ function SpendingsPage() {
           </table>
         )}
       </div>
-      <div className="content">
-      <h3>Monthly Spending</h3>
-      <ResponsiveContainer width="100%" height={300}>
-        <LineChart data={getMonthlySpendingData(transactions)}>
-          <CartesianGrid stroke="#ccc" />
-          <XAxis dataKey="month" />
-          <YAxis />
-          <Tooltip />
-          <Line type="monotone" dataKey="total" stroke="#8884d8" strokeWidth={2} />
-        </LineChart>
-      </ResponsiveContainer>
-    </div>
+      <div className="content" id="chart">
+        <h3>Monthly Spending</h3>
+        <ResponsiveContainer width="100%" height={300}>
+          <LineChart data={getMonthlySpendingData(transactions)}>
+            <CartesianGrid stroke="#ccc" />
+            <XAxis dataKey="month" />
+            <YAxis />
+            <Tooltip />
+            <Line type="monotone" dataKey="total" stroke="#8884d8" strokeWidth={2} />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
 
     </div>
   );
