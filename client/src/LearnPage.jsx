@@ -14,20 +14,18 @@ function LearnPage() {
         <Link to="/learn/investing" className="topic-link">Investing Basics</Link>
         <Link to="/learn/budgeting" className="topic-link">Budgeting 101</Link>
       </div>
-      
-      <div className="topic-content">
-        <Routes>
-          <Route path="saving" element={<SavingTopic />} />
-          <Route path="investing" element={<InvestingTopic />} />
-          <Route path="budgeting" element={<BudgetingTopic />} />
-          <Route path="/" element={
-            <div className="welcome-message">
-              <h2>Welcome to the Learning Center</h2>
-              <p>Select a topic above to start learning about personal finance.</p>
-            </div>
-          } />
-        </Routes>
-      </div>
+
+    <Routes className="topic-content">
+      <Route path="saving" element={<SavingTopic />} />
+      <Route path="investing" element={<InvestingTopic />} />
+      <Route path="budgeting" element={<BudgetingTopic />} />
+      <Route path="/" element={
+        <div className="welcome-message">
+          <h2>Welcome to the Learning Center</h2>
+          <p>Select a topic above to start learning about personal finance.</p>
+        </div>
+      } />
+    </Routes>
     </div>
   );
 }

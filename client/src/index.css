@@ -3,12 +3,22 @@
 body {
   background: #dddbd5;
   font-family: 'Merriweather', serif;
-  margins: 1.5rem;
 }
 
-.dark-mode {
+.dark-mode, .dark-mode .topic-content {
   background: #353532;
   color: white;
+}
+.dark-mode .content, .dark-mode .learn-page, .dark-mode .topic-section {
+  background: #5e5e59;
+}
+
+.dark-mode .form-group label, .dark-mode .topic-section p {
+  color: white;
+}
+
+.dark-mode .topic-section ul, .dark-mode .content th {
+  color: black;
 }
 
 :root {
