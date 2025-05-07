@@ -96,17 +96,52 @@ This section will contain the most content. The documentation should fully docum
 
 Give screenshots of your running project and briefly describe what is in the screenshots.
 
+### Home Page (Light)
+
 ![Home Page Light](images/homePageLight.png)
+
+### Home Page (Dark)
+
 ![Home Page Light](images/homePageDark.png)
+
+### Login Popup
+
 ![Login Popup](images/login.png)
+
+### Sign Up Popup
+
 ![Sign Up Popup](images/signup.png)
+
+### Savings Page
+
 ![Savings Page](images/savingsPage.png)
+
+### Spendings Page 1
+
 ![Spendings Page 1](images/spendingsPage1.png)
+
+### Spendings Page 2
+
 ![Spendings Page 2](images/spendingsPage2.png)
+
+### Learn Page 1
+
 ![Learn Page 1](images/learnPage1.png)
+
+### Learn Page 2
+
 ![Learn Page 2](images/learnPage2.png)
+
+### Account Page
+
 ![Account Page](images/accountPage.png)
+
+### Change Email
+
 ![Change Email](images/changeEmail.png)
+
+### Change Password
+
 ![Change Password](images/changePassword.png)
 
 ## Status
