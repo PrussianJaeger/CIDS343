@@ -45,39 +45,39 @@ Footer
 
 Some of the key modules are as follows...
 
-App.jsx
+### App.jsx
 
 1. root component
 2. Initializes routes
 3. contains global layout and navigation
 4. hosts login/singup state
 
-UserContent.jsx
+### UserContent.jsx
 
 1. React context provider
 2. shares current user state globally
 
-AuthPopup.jsx
+### AuthPopup.jsx
 
 1. Manages login and singup forms
 2. sends credentials to backend via fetch
 
-SavingsPage.jsx
+### SavingsPage.jsx
 
 1. Allows user to input and save monthly salary
 2. interacts with /get-salary and /set-salary endpoints
 
-SpendingsPage.jsx
+### SpendingsPage.jsx
 
 1. Lets users log and view categorized expenses
 2. fetches transaction list from backend
 
-LearnPage.jsx
+### LearnPage.jsx
 
 1. Contains three educational modules: Saving, budgeting, investing.
 2. User nested routes for topic content
 
-AccountPage.jsx
+### AccountPage.jsx
 
 1. Displays Current user and logout option
 
@@ -143,6 +143,14 @@ Give screenshots of your running project and briefly describe what is in the scr
 ### Change Password
 
 ![Change Password](images/changePassword.png)
+
+### User Table
+
+![User Table](images/userTable.png)
+
+### Transaction Table
+
+![Transaction Table](images/transanctionTable.png)
 
 ## Status
 
