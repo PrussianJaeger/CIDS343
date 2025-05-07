@@ -2,11 +2,11 @@ const sqlite3 = require('sqlite3').verbose();
 const express = require("express");
 const cors = require("cors");
 const session = require('express-session');
+const bodyParser = require('body-parser');
 
 const app = express();
 const PORT = 5001;
 
-// Middleware
 app.use(express.json());
 app.use(cors({
   origin: "http://localhost:5173",
@@ -137,7 +137,6 @@ app.post("/set-salary", (req, res) => {
   });
 });
 
-// Transaction Routes
 app.post("/transactions", (req, res) => {
   const { email } = req.body;
   if (!email) return res.status(400).json({ error: "Email is required." });
@@ -181,6 +180,91 @@ app.post("/add-transaction", (req, res) => {
         transactionId: this.lastID
       });
     });
+  });
+});
+
+app.post("/change-password", (req, res) => {
+  const { password } = req.body;
+  const userId = req.session?.user?.id;
+
+  if (!userId || !password || password.length < 2) {
+    return res.status(400).json({ error: "Invalid session or password too short." });
+  }
+
+  const updateQuery = "UPDATE users SET password = ? WHERE id = ?";
+  db.run(updateQuery, [password, userId], function (err) {
+    if (err) {
+      console.error("Error updating password:", err.message);
+      return res.status(500).json({ error: "Database error while changing password." });
+    }
+
+    res.json({ message: "Password changed successfully." });
+  });
+});
+
+app.post("/change-email", (req, res) => {
+  const { email } = req.body;
+  const userId = req.session?.user?.id;
+
+  if (!userId || !email || email.length < 2) {
+    return res.status(400).json({ error: "Invalid session or email too short." });
+  }
+
+  const updateQuery = "UPDATE users SET email = ? WHERE id = ?";
+  db.run(updateQuery, [email, userId], function (err) {
+    if (err) {
+      console.error("Error updating email:", err.message);
+      return res.status(500).json({ error: "Database error while changing email." });
+    }
+
+    res.json({ message: "email changed successfully." });
+  });
+});
+
+// Route to get savings data
+app.post('/get-savings', (req, res) => {
+  const { email } = req.body;
+
+  db.get('SELECT * FROM users WHERE email = ?', [email], (err, row) => {
+    if (err) {
+      console.error('Error fetching savings data:', err);
+      return res.status(500).json({ error: 'Database error' });
+    }
+    if (!row) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    res.json({
+      monthlySalary: row.monthlySalary,
+      monthly_goal: row.monthly_goal,
+      total_monthly_savings: row.total_monthly_savings,
+      total_savings: row.total_savings
+    });
+  });
+});
+
+// Route to update savings data
+app.post('/update-savings', (req, res) => {
+  const { email, field, value } = req.body;
+  
+  const fields = ['monthlySalary', 'monthly_goal', 'total_monthly_savings', 'total_savings'];
+  
+  if (!fields.includes(field)) {
+    return res.status(400).json({ error: 'Invalid field' });
+  }
+
+  const query = `UPDATE users SET ${field} = ? WHERE email = ?`;
+
+  db.run(query, [value, email], function(err) {
+    if (err) {
+      console.error('Error updating savings:', err);
+      return res.status(500).json({ error: 'Database error' });
+    }
+
+    if (this.changes === 0) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.status(200).json({ success: true });
   });
 });
 
