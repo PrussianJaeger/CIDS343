@@ -27,19 +27,33 @@ This Financial tracker is a web based application built with React and Vite that
 The app is designed as follows...
 
 APP
+
   Header
+  
   Router
+  
     HomePage
+    
     AccountPage
+    
     SavingsPage
+    
     SpendingsPage
+    
     SettingsPage
+    
     LearnPage
+    
       SavingTopic
+      
       InvestingTopic
+      
       BugdetingTopic
+      
 AuthPopup (Login/Signup)
+
 CurrentUser
+
 Footer
 
 Some of the key modules are as follows...
