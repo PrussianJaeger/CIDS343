@@ -20,12 +20,52 @@ Your documentation should have three sections: Overview, Design, Examples, and S
 # Overview of Required Sections
 
 ## Overview
-
-Give a high-level description of your software. The description should be clear and professional. You can use images if it helps.
+This Financial tracker is a web based application built with React and Vite that allows users to manage their personal finances. Users can create an account, log in securely, track their income and expenses, manage their monthly salary, and learn basic financial literacy through educational modules. Data is persisted using a backend API (Node.js/Express) with a MySQL database. The app focuses on user-friendliness, modular design, and visual clarity.
 
 ## Design
 
-The logical view describes the main functional components of the system. This includes modules and the static relationships between modules.
+The app is designed as follows...
+
+APP
+  Header
+  Router
+    HomePage
+    AccountPage
+    SavingsPage
+    SpendingsPage
+    SettingsPage
+    LearnPage
+      SavingTopic
+      InvestingTopic
+      BugdetingTopic
+AuthPopup (Login/Signup)
+CurrentUser
+Footer
+
+Some of the key modules are as follows...
+
+App.jsx 
+1. root component
+2. Initializes routes
+3. contains global layout and navigation
+4. hosts login/singup state
+UserContent.jsx
+1. React context provider
+2. shares current user state globally
+AuthPopup.jsx
+1. Manages login and singup forms
+2. sends credentials to backend via fetch
+SavingsPage.jsx 
+1. Allows user to input and save monthly salary
+2. interacts with /get-salary and /set-salary endpoints
+SpendingsPage.jsx
+1. Lets users log and view categorized expenses
+2. fetches transaction list from backend
+LearnPage.jsx
+1. Contains three educational modules: Saving, budgeting, investing.
+2. User nested routes for topic content
+AccountPage.jsx
+1. Displays Current user and logout option
 
 ### Diagrams you might want to use
 
@@ -44,4 +84,15 @@ Give screenshots of your running project and briefly describe what is in the scr
 
 ## Status
 
-Give the current status of the software. List what is working and what is planned for future releases. When listing planned features, assume that the the project will continue even after the course ends.
+CURRENT FEATURES
+1. Create account, log in, log out
+2. View and update salary
+3. Log categorized spending
+4. Access educational content
+5. Responsize styling and dark mode support
+
+PLANNED FEATURES
+1. Visual dashboards with pie or bar charts
+2. Recurring transaction scheduling
+3. Income vs Spending trends
+4. Backend deployment to cloud (Render/Heroku)
