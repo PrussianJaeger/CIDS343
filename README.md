@@ -20,6 +20,7 @@ Your documentation should have three sections: Overview, Design, Examples, and S
 # Overview of Required Sections
 
 ## Overview
+
 This Financial tracker is a web based application built with React and Vite that allows users to manage their personal finances. Users can create an account, log in securely, track their income and expenses, manage their monthly salary, and learn basic financial literacy through educational modules. Data is persisted using a backend API (Node.js/Express) with a MySQL database. The app focuses on user-friendliness, modular design, and visual clarity.
 
 ## Design
@@ -27,50 +28,57 @@ This Financial tracker is a web based application built with React and Vite that
 The app is designed as follows...
 
 APP
-  Header
-  Router
-    HomePage
-    AccountPage
-    SavingsPage
-    SpendingsPage
-    SettingsPage
-    LearnPage
-      SavingTopic
-      InvestingTopic
-      BugdetingTopic
+Header
+Router
+HomePage
+AccountPage
+SavingsPage
+SpendingsPage
+SettingsPage
+LearnPage
+SavingTopic
+InvestingTopic
+BugdetingTopic
 AuthPopup (Login/Signup)
 CurrentUser
 Footer
 
 Some of the key modules are as follows...
 
-App.jsx 
+App.jsx
+
 1. root component
 2. Initializes routes
 3. contains global layout and navigation
 4. hosts login/singup state
-   
+
 UserContent.jsx
+
 1. React context provider
 2. shares current user state globally
-   
+
 AuthPopup.jsx
+
 1. Manages login and singup forms
 2. sends credentials to backend via fetch
-   
-SavingsPage.jsx 
+
+SavingsPage.jsx
+
 1. Allows user to input and save monthly salary
 2. interacts with /get-salary and /set-salary endpoints
-   
+
 SpendingsPage.jsx
+
 1. Lets users log and view categorized expenses
 2. fetches transaction list from backend
-   
+
 LearnPage.jsx
+
 1. Contains three educational modules: Saving, budgeting, investing.
 2. User nested routes for topic content
-   
+
 AccountPage.jsx
+
 1. Displays Current user and logout option
 
 ### Diagrams you might want to use
@@ -88,9 +96,23 @@ This section will contain the most content. The documentation should fully docum
 
 Give screenshots of your running project and briefly describe what is in the screenshots.
 
+![Home Page Light](images/homePageLight.png)
+![Home Page Light](images/homePageDark.png)
+![Login Popup](images/login.png)
+![Sign Up Popup](images/signup.png)
+![Savings Page](images/savingsPage.png)
+![Spendings Page 1](images/spendingsPage1.png)
+![Spendings Page 2](images/spendingsPage2.png)
+![Learn Page 1](images/learnPage1.png)
+![Learn Page 2](images/learnPage2.png)
+![Account Page](images/accountPage.png)
+![Change Email](images/changeEmail.png)
+![Change Password](images/changePassword.png)
+
 ## Status
 
 CURRENT FEATURES
+
 1. Create account, log in, log out
 2. View and update salary
 3. Log categorized spending
@@ -98,6 +120,7 @@ CURRENT FEATURES
 5. Responsize styling and dark mode support
 
 PLANNED FEATURES
+
 1. Visual dashboards with pie or bar charts
 2. Recurring transaction scheduling
 3. Income vs Spending trends
