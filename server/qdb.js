@@ -14,7 +14,7 @@ app.use(cors({
 }));
 
 app.use(session({
-  secret: 'supersecretkey', // Use a secure env variable in production
+  secret: 'supersecretkey',
   resave: false,
   saveUninitialized: false,
   cookie: {
@@ -26,18 +26,18 @@ app.use(session({
 // DB Connection
 const db = new sqlite3.Database('./database.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
   if (err) {
-    console.error("❌ Database connection error:", err.message);
+    console.error("Database connection error:", err.message);
   } else {
-    console.log("✅ Connected to the SQLite database.");
+    console.log("Connected to the SQLite3 database.");
     // Create transactions table if it doesn't exist
     db.run(`CREATE TABLE IF NOT EXISTS transactions (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      user_id INTEGER NOT NULL,
+      transactionId INTEGER PRIMARY KEY AUTOINCREMENT,
+      userId INTEGER NOT NULL,
       amount REAL NOT NULL,
       description TEXT,
       category TEXT,
       date TEXT DEFAULT CURRENT_TIMESTAMP,
-      FOREIGN KEY (user_id) REFERENCES users(id)
+      FOREIGN KEY (userId) REFERENCES users(id)
     )`);
   }
 });
@@ -144,7 +144,7 @@ app.post("/transactions", (req, res) => {
   const query = `
     SELECT t.* 
     FROM transactions t
-    JOIN users u ON t.user_id = u.id
+    JOIN users u ON t.userId = u.id
     WHERE u.email = ?
     ORDER BY t.date DESC
   `;
@@ -161,14 +161,14 @@ app.post("/add-transaction", (req, res) => {
     return res.status(400).json({ error: "All fields are required." });
   }
 
-  // First get the user_id from email
+  // First get the userId from email
   db.get("SELECT id FROM users WHERE email = ?", [email], (err, user) => {
     if (err) return res.status(500).json({ error: "Database error." });
     if (!user) return res.status(404).json({ error: "User not found." });
 
     // Then insert the transaction
     const insertQuery = `
-      INSERT INTO transactions (user_id, amount, description, category)
+      INSERT INTO transactions (userId, amount, description, category)
       VALUES (?, ?, ?, ?)
     `;
 
@@ -235,9 +235,9 @@ app.post('/get-savings', (req, res) => {
     }
     res.json({
       monthlySalary: row.monthlySalary,
-      monthly_goal: row.monthly_goal,
-      total_monthly_savings: row.total_monthly_savings,
-      total_savings: row.total_savings
+      monthly_goal: row.monthlyGoal,
+      total_monthly_savings: row.totalMonthlySavings,
+      total_savings: row.totalSavings
     });
   });
 });
@@ -246,7 +246,7 @@ app.post('/get-savings', (req, res) => {
 app.post('/update-savings', (req, res) => {
   const { email, field, value } = req.body;
   
-  const fields = ['monthlySalary', 'monthly_goal', 'total_monthly_savings', 'total_savings'];
+  const fields = ['monthlySalary', 'monthlyGoal', 'totalMonthlySavings', 'totalSavings'];
   
   if (!fields.includes(field)) {
     return res.status(400).json({ error: 'Invalid field' });

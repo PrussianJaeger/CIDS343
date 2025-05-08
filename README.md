@@ -27,59 +27,74 @@ This Financial tracker is a web based application built with React and Vite that
 
 The app is designed as follows...
 
-APP
-Header
-Router
-HomePage
-AccountPage
-SavingsPage
-SpendingsPage
-SettingsPage
-LearnPage
-SavingTopic
-InvestingTopic
-BugdetingTopic
-AuthPopup (Login/Signup)
-CurrentUser
-Footer
+    APP
+
+      Header
+
+      Router
+
+        HomePage
+
+        AccountPage
+
+        SavingsPage
+
+        SpendingsPage
+
+        SettingsPage
+
+        LearnPage
+
+          SavingTopic
+
+          InvestingTopic
+
+          BugdetingTopic
+
+    AuthPopup (Login/Signup)
+
+    CurrentUser
+
+    Footer
 
 Some of the key modules are as follows...
 
 ### App.jsx
 
-1. root component
+1. Root component
 2. Initializes routes
-3. contains global layout and navigation
-4. hosts login/singup state
+3. Contains global layout and navigation
+4. Hosts login/singup state
 
 ### UserContent.jsx
 
 1. React context provider
-2. shares current user state globally
+2. Shares current user state globally
 
 ### AuthPopup.jsx
 
 1. Manages login and singup forms
-2. sends credentials to backend via fetch
+2. Sends credentials to backend via fetch
 
 ### SavingsPage.jsx
 
 1. Allows user to input and save monthly salary
-2. interacts with /get-salary and /set-salary endpoints
+2. Interacts with /get-salary and /set-salary endpoints
 
 ### SpendingsPage.jsx
 
 1. Lets users log and view categorized expenses
-2. fetches transaction list from backend
+2. Fetches transaction list from backend
 
 ### LearnPage.jsx
 
-1. Contains three educational modules: Saving, budgeting, investing.
+1. Contains three educational modules: Saving, budgeting, investing
 2. User nested routes for topic content
 
 ### AccountPage.jsx
 
 1. Displays Current user and logout option
+2. Has buttons to change email and password
 
 ### Diagrams you might want to use
 
@@ -87,6 +102,10 @@ Some of the key modules are as follows...
 - **UML Class Diagram**: for depicting code structure
 - **UML State Diagram**: for depicting states of your software
 - **ERD Diagram**: for depicting the tables in a database
+
+### ERD Diagram
+
+![ERD Diagram](images/)
 
 You can use any other diagram that you find helpful for describing your software. You are expected to use diagrams and clearly describe what is depicted in your diagrams.
 
@@ -150,7 +169,7 @@ Give screenshots of your running project and briefly describe what is in the scr
 
 ### Transaction Table
 
-![Transaction Table](images/transanctionTable.png)
+![Transaction Table](images/transactionTable.png)
 
 ## Status
 

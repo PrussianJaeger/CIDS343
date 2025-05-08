@@ -59,7 +59,7 @@ function SpendingsPage() {
       const date = new Date(t.date);
       const year = date.getFullYear();
       const month = String(date.getMonth() + 1).padStart(2, '0');
-      const key = `${month}-${year}`; // e.g., "04-2025"
+      const key = `${month}-${year}`; 
   
       if (!monthlyTotals[key]) {
         monthlyTotals[key] = 0;
@@ -69,7 +69,6 @@ function SpendingsPage() {
   
     return Object.entries(monthlyTotals)
       .sort(([a], [b]) => {
-        // Convert "MM-YYYY" back to a Date for proper sorting
         const [monthA, yearA] = a.split('-').map(Number);
         const [monthB, yearB] = b.split('-').map(Number);
         return new Date(yearA, monthA - 1) - new Date(yearB, monthB - 1);
@@ -223,7 +222,7 @@ function SpendingsPage() {
             <tbody>
               {sortedTransactions.map(transaction => (
                 <tr key={transaction.id}>
-                  <td>{transaction.id}</td>
+                  <td>{transaction.transactionId}</td>
                   <td>{new Date(transaction.date).toLocaleDateString()}</td>
                   <td>{transaction.description}</td>
                   <td>{transaction.category}</td>
