@@ -21,7 +21,7 @@ Your documentation should have three sections: Overview, Design, Examples, and S
 
 ## Overview
 
-This Financial tracker is a web based application built with React and Vite that allows users to manage their personal finances. Users can create an account, log in securely, track their income and expenses, manage their monthly salary, and learn basic financial literacy through educational modules. Data is persisted using a backend API (Node.js/Express) with a MySQL database. The app focuses on user-friendliness, modular design, and visual clarity.
+This Financial tracker is a web based application built with React and Vite that allows users to manage their personal finances. Users can create an account, log in securely, track their income and expenses, manage their monthly salary, and learn basic financial literacy through educational modules. Data is persisted using a backend API (Node.js/Express) with a MySQL database. The app focuses on user-friendliness, modular design, and visual clarity. It serves as both a tool of utility in its financial tracking abilities, and an oppurtunity to learn more about financial literacy and how to properly save and spend money, which in turn makes the utility function of the app even more useful. It is an app that can be applied by people of all walks of life, at any time, and for any kind of financial tracking you can imagine.
 
 ## Design
 
