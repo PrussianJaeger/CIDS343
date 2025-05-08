@@ -30,27 +30,27 @@ The app is designed as follows...
     APP
 
       Header
-
+  
       Router
-
+  
         HomePage
-
+    
         AccountPage
-
+    
         SavingsPage
-
+    
         SpendingsPage
-
+    
         SettingsPage
-
+    
         LearnPage
-
+    
           SavingTopic
-
+      
           InvestingTopic
-
+      
           BugdetingTopic
-
+      
     AuthPopup (Login/Signup)
 
     CurrentUser
