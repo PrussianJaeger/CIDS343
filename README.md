@@ -105,7 +105,11 @@ Some of the key modules are as follows...
 
 ### ERD Diagram
 
-![ERD Diagram](images/)
+![ERD Diagram](images/ERD.png)
+
+### Relational Schema
+
+![Relational Schema](images/relSchem.png)
 
 You can use any other diagram that you find helpful for describing your software. You are expected to use diagrams and clearly describe what is depicted in your diagrams.
 
