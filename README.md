@@ -30,27 +30,27 @@ The app is designed as follows...
     APP
 
       Header
-  
+
       Router
-  
+
         HomePage
-    
+
         AccountPage
-    
+
         SavingsPage
-    
+
         SpendingsPage
-    
+
         SettingsPage
-    
+
         LearnPage
-    
+
           SavingTopic
-      
+
           InvestingTopic
-      
+
           BugdetingTopic
-      
+
     AuthPopup (Login/Signup)
 
     CurrentUser
@@ -110,6 +110,10 @@ Some of the key modules are as follows...
 ### Relational Schema
 
 ![Relational Schema](images/relSchem.png)
+
+### State Diagram
+
+![State Diagram](images/StateDiagram.png)
 
 You can use any other diagram that you find helpful for describing your software. You are expected to use diagrams and clearly describe what is depicted in your diagrams.
 
