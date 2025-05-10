@@ -11,27 +11,27 @@ The app is designed as follows...
     APP
 
       Header
-  
+
       Router
-  
+
         HomePage
-    
+
         AccountPage
-    
+
         SavingsPage
-    
+
         SpendingsPage
-    
+
         SettingsPage
-    
+
         LearnPage
-    
+
           SavingTopic
-      
+
           InvestingTopic
-      
+
           BugdetingTopic
-      
+
     AuthPopup (Login/Signup)
 
     CurrentUser
@@ -86,8 +86,9 @@ Some of the key modules are as follows...
 
 ![Relational Schema](images/relSchem.png)
 
-## Examples
+### State Diagram
 
+![State Diagram](images/StateDiagram.png)
 
 ### Home Page (Light)
 
