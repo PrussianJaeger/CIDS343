@@ -4,6 +4,7 @@ import HomePage from './HomePage';
 import AccountPage from './AccountPage';
 import SavingsPage from './SavingsPage';
 import SpendingsPage from './SpendingsPage';
+import IncomeVsSpendingPage from './IncomeVsSpendingPage';
 import LearnPage from './LearnPage';
 import AuthPopup from './components/AuthPopup'
 import React, { useContext } from "react";
@@ -29,6 +30,7 @@ function NavBar() {
               <Link to="/savings" className="link">Savings</Link>
               <Link to="/spendings" className="link">Spendings</Link>
               <Link to="/learn" className="link">Learn</Link>
+              <Link to="/income-vs-spending" className="link">Income vs Spending</Link>
             </div>
           ) : (
             <div className="nav-links">
@@ -65,6 +67,7 @@ function NavBar() {
             <Route path="/savings" element={<SavingsPage />} />
             <Route path="/spendings" element={<SpendingsPage />} />
             <Route path="/learn/*" element={<LearnPage />} />
+            <Route path="/income-vs-spending" element={<IncomeVsSpendingPage />} />
           </Routes>
         </main>
       </Router>
